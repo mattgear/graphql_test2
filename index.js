@@ -8,11 +8,11 @@ const ContactQuery = require('./server/contacts/ContactQuery');
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQuery',
-  // fields: () => ({
-  //   customer: { CustomerQuery },
-  //   contact: { ContactQuery },
-  // }),
-  fields: { CustomerQuery },
+  fields: () => ({
+    ...CustomerQuery,
+    ...ContactQuery,
+  }),
+  // fields: { CustomerQuery },
 });
 
 const schema = new GraphQLSchema({
