@@ -5,6 +5,7 @@ const { GraphQLSchema, GraphQLObjectType, GraphQLID } = graphql;
 
 const CustomerQuery = require('./server/customer/CustomerQuery');
 const ContactQuery = require('./server/contacts/ContactQuery');
+const ContactMutation = require('./server/contacts/ContactMutation');
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQuery',
@@ -12,11 +13,18 @@ const RootQuery = new GraphQLObjectType({
     ...CustomerQuery,
     ...ContactQuery,
   }),
-  // fields: { CustomerQuery },
+});
+
+const RootMutation = new GraphQLObjectType({
+  name: 'RootMutation',
+  fields: () => ({
+    ...ContactMutation,
+  }),
 });
 
 const schema = new GraphQLSchema({
   query: RootQuery,
+  mutation: RootMutation,
 });
 
 const app = express();
